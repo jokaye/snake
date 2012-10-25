@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Super snake</title>
+	<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+<div id="container">
+
+</div>
+<script type="text/javascript" src="http://yui.yahooapis.com/3.7.2/build/yui/yui-min.js "></script>
+<script type="text/javascript" src="view.js"></script>
+<script type="text/javascript">
+YUI().use('node','snake',function(Y){
+	var snake = new Y.designer.Snake({
+		container : Y.one('#container')
+	});
+	snake.render();
+})
+
+</script>
+</body>
+</html>
