@@ -82,9 +82,7 @@ YUI.add('snake', function(Y) {
             }, this)
 
         },
-        app: function() {
-            this.move();
-        },
+        
         move: function() {
             clearTimeout(timeOut);
             var container = this.get('container');
