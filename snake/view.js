@@ -82,7 +82,7 @@ YUI.add('snake', function(Y) {
             }, this)
 
         },
-        
+
         move: function() {
             clearTimeout(timeOut);
             var container = this.get('container');
@@ -97,7 +97,7 @@ YUI.add('snake', function(Y) {
             }
 
             var body = this.renderBody();
-            var header = container.all('.designer_snake');
+            var header = container.all('.designer_snake:first-child');
             var t = parseInt(header.getStyle('top')) + y;
             var l = parseInt(header.getStyle('left')) + x;
             body.setStyles({
