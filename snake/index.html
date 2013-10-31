@@ -2,26 +2,35 @@
 <html>
 <head>
 	<title>Super snake</title>
-	<link rel="stylesheet" type="text/css" href="main.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/odometer-theme-digital.css">
 </head>
 <body>
 <div id="container">
 
 </div>
-<h1 style="padding-top:30px;">A simple game of snake</h1>
-<p>Introduction : use "↑,↓,←,→" to control this snake</p>
-<p><a href="https://github.com/jokaye/snake" target="_blank">I'm on githup</a></p>
+<div class="intro">
+	<h1 style="padding-top:30px;">A simple game of snake</h1>
+	<p>Introduction : use "↑,↓,←,→" to control this snake</p>
+	<p><a href="https://github.com/jokaye/snake" target="_blank">I'm on githup</a></p>
+	<div class="score_marker"></div>
+</div>
 
 
-<script type="text/javascript" src="http://yui.yahooapis.com/3.7.2/build/yui/yui-min.js "></script>
-<script type="text/javascript" src="view.js"></script>
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.min.js"></script>
+<script type="text/javascript" src="js/odometer.min.js"></script>
+<script type="text/javascript" src="http://cdn.staticfile.org/yui/3.3.0/yui-min.js"></script>
+<script type="text/javascript" src="js/view.js"></script>
 <script type="text/javascript">
+window.odometerOptions = {
+	duration: 1000
+}
 YUI().use('node','snake',function(Y){
 	var snake = new Y.designer.Snake({
 		container : Y.one('#container')
 	});
 	snake.render();
-})
+});
 
 </script>
 </body>

@@ -1,0 +1,53 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*CSS reset*/
+* {
+	margin: 0;
+	padding: 0;
+}
+body{
+	height:650px;
+	background:rgb(240, 240, 240);
+}
+#container{
+	width:800px;
+	height:400px;
+	border:2px dashed #000;
+	position:relative;
+	overflow:hidden;
+	-webkit-border-radius :20px;
+	border-radius :20px;
+	-o-border-radius :20px;
+}
+
+
+.intro {
+	width:800px;
+	text-align: center;
+}
+
+.intro p{
+	padding: 10px;
+}
+
+.score_marker {
+  font-size: 40px;
+}
+.designer_snake{
+	width:40px;
+	height:40px;
+	background:url(blocks_mm_device_wired.jpg) no-repeat center top transparent;
+	background-size:95%;
+	position:absolute;
+
+}
+
+
+.designer_food{
+	width:40px;
+	height:40px;
+	position:absolute;
+	background:url(lettuce.png) no-repeat center top transparent;
+	background-size:100%;
+}

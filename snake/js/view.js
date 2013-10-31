@@ -16,6 +16,19 @@ YUI.add('snake', function(Y) {
             this.renderSnake();
             this.renderFood();
             this.buildListener();
+            this.renderScoreMarker();
+        },
+
+        renderScoreMarker: function() {
+            var maker = document.querySelector('.score_marker');
+            od = new Odometer({
+                  el: maker,
+                  value: 0,
+                  format: '',
+                  theme: 'digital'
+                });
+            this.set('maker', od);
+
         },
 
         renderSnake: function() {
@@ -107,32 +120,42 @@ YUI.add('snake', function(Y) {
                 left: l
             });
             container.prepend(body);
-            this.checkFringe(body);
             this.eatFood(body,food);
             
-            if(this.checkPosition(l,t,1)){
+            if(this.checkPosition(l,t,1) || this.checkFringe(body)){
                 this.lose();
+            }else{
+
+                var instance = this;
+
+                timeOut = setTimeout(function() {
+                    instance.move();
+                }, speed);
+                this.get('timeOut').push(timeOut);
             }
-
-            var instance = this;
-
-            timeOut = setTimeout(function() {
-                instance.move();
-            }, speed);
-
         },
+
+        stop: function() {
+            Y.Array.each(this.get('timeOut'), function(t){
+                clearTimeout(t);
+            })
+        },
+
         checkFringe: function(body) {
             var top = parseInt(body.getStyle('top'), 10);
             var left = parseInt(body.getStyle('left'), 10);
             if(top < 0 || top > 360 || left < 0 || left > 760) {
-                this.lose();
+                return true;
             }
+            return false;
         },
+
         eatFood: function(body,food) {
             var top = parseInt(body.getStyle('top'), 10);
                 left = parseInt(body.getStyle('left'), 10),
                 food_top =parseInt(food.getStyle('top'), 10),
-                food_left =parseInt(food.getStyle('left'), 10);
+                food_left =parseInt(food.getStyle('left'), 10),
+                maker = this.get('maker');
 
             if(top == food_top && left == food_left){
                 this.set('eating',true);
@@ -140,11 +163,13 @@ YUI.add('snake', function(Y) {
                 count +=1;
                 this.set('count',count);
                 food.remove();
+                maker.update(count);
                 this.renderFood();
             }else{
                 this.set('eating',false);
             }
         },
+
 
         checkPosition: function(x, y, i) {
             var container = this.get('container');
@@ -168,12 +193,15 @@ YUI.add('snake', function(Y) {
         },
 
         lose : function(){
+            this.stop();
+            this.destroy();
             alert('You lose , your count is '+ this.get('count') +'!');
             window.location.reload();
         }
     }, {
         ATTRS: {
             container: null,
+            maker: null,
             speed: {
                 value: 240
             },
@@ -186,7 +214,9 @@ YUI.add('snake', function(Y) {
             eating : {
                 value : false
             },
-            timeOut: null,
+            timeOut: {
+                value : []
+            },
             count : {
                 value : 0
             },
